@@ -2,7 +2,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       BBQ GUI
- * Plugin URI:        https://github.com/LyntServices/bbq-gui
+ * Plugin URI:        http://lynt.cz/
  * Description:       GUI for BBQ blacklist and whitelist.
  * Version:           1.0.0
  * Author:            Vladimir Smitka
@@ -30,14 +30,14 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_section(
 		'bbq_gui_pluginPage_section', 
-		__( 'Whitelist', 'bbq_gui' ), 
+		__( 'Whitelist', 'bbq-gui' ), 
 		'bbq_gui_settings_section_callback', 
 		'pluginPageWhite'
 	);
 	
 	add_settings_section(
 		'bbq_gui_pluginPage_section', 
-		__( 'Blacklist', 'bbq_gui' ), 
+		__( 'Blacklist', 'bbq-gui' ), 
 		'bbq_gui_settings_section_callback', 
 		'pluginPageBlack'
 	);
@@ -46,7 +46,7 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_field( 
 		'bbq_gui_white_request', 
-		__( 'Request URIs', 'bbq_gui' ), 
+		__( 'Request URIs', 'bbq-gui' ), 
 		'bbq_gui_white_request_uri_render', 
 		'pluginPageWhite', 
 		'bbq_gui_pluginPage_section' 
@@ -54,7 +54,7 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_field( 
 		'bbq_gui_query_string', 
-		__( 'Query strings', 'bbq_gui' ), 
+		__( 'Query strings', 'bbq-gui' ), 
 		'bbq_gui_white_query_string_render', 
 		'pluginPageWhite', 
 		'bbq_gui_pluginPage_section' 
@@ -62,7 +62,7 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_field( 
 		'bbq_gui_user_agent', 
-		__( 'User Agents', 'bbq_gui' ), 
+		__( 'User Agents', 'bbq-gui' ), 
 		'bbq_gui_white_user_agent_render', 
 		'pluginPageWhite', 
 		'bbq_gui_pluginPage_section' 
@@ -73,7 +73,7 @@ function bbq_gui_settings_init(  ) {
 
 		add_settings_field( 
 		'bbq_gui_request_uri', 
-		__( 'Request URIs', 'bbq_gui' ), 
+		__( 'Request URIs', 'bbq-gui' ), 
 		'bbq_gui_black_request_uri_render', 
 		'pluginPageBlack', 
 		'bbq_gui_pluginPage_section' 
@@ -81,7 +81,7 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_field( 
 		'bbq_gui_query_string', 
-		__( 'Query strings', 'bbq_gui' ), 
+		__( 'Query strings', 'bbq-gui' ), 
 		'bbq_gui_black_query_string_render', 
 		'pluginPageBlack', 
 		'bbq_gui_pluginPage_section' 
@@ -89,7 +89,7 @@ function bbq_gui_settings_init(  ) {
 
 	add_settings_field( 
 		'bbq_gui_user_agent', 
-		__( 'User Agents', 'bbq_gui' ), 
+		__( 'User Agents', 'bbq-gui' ), 
 		'bbq_gui_black_user_agent_render', 
 		'pluginPageBlack', 
 		'bbq_gui_pluginPage_section' 
@@ -161,7 +161,7 @@ function bbq_gui_black_user_agent_render(  ) {
 
 function bbq_gui_settings_section_callback(  ) { 
 
-	echo __( 'comma separeated strings', 'bbq_gui' );
+	echo __( 'comma separeated strings', 'bbq-gui' );
 
 }
 
@@ -187,6 +187,8 @@ function bbq_gui_options_page(  ) {
 
 
 function bbq_gui_init(  ) {
+	
+	load_plugin_textdomain( 'bbq-gui', false, 'bbq-gui/languages' );
 
 	add_filter('request_uri_items',  'bbq_gui_blacklist_request_uri_items',  10, 1);
 	add_filter('query_string_items', 'bbq_gui_blacklist_query_string_items', 10, 1);
@@ -283,13 +285,11 @@ function bbq_gui_whitelist_user_agent_items($items) {
 
 
 function bbq_gui_admin_notice() {
-	ob_start();
 	?>
 	<div class="error">
-		<p><?php _e( 'BBQ: Block Bad Queries plugin is required to activate BBQ GUI. Please install and activate it.' , 'bbq_gui' ); ?></p>
+		<p><?php _e( 'BBQ: Block Bad Queries plugin is required to use BBQ GUI. Please install and activate it.' , 'bbq-gui' ); ?></p>
 	</div>
 	<?php
-	echo ob_get_clean();
 }
 
 
